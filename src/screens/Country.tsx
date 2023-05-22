@@ -19,7 +19,7 @@ const Country = () => {
 
   return (
     <div>
-      <div> ContinentsDetails </div>
+      <div> Details Pays </div>
       {country && (
         <>
           <div>{name}</div>

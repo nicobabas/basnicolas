@@ -19,7 +19,7 @@ const ContinentsDetails = () => {
 
   return (
     <div>
-      <div> ContinentsDetails </div>
+      <div> Details Continent </div>
       {continent && (
         <>
           <div>{name}</div>
