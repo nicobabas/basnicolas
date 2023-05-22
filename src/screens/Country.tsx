@@ -1,7 +1,41 @@
+import React from "react";
+import { Link, useParams } from "react-router-dom";
+
+import { useGetContinentByIdQuery } from "../gql/generated/schema";
+import Loader from "../components/Loader";
+
 const Country = () => {
+  const { id = "" } = useParams();
+
+  const { data } = useGetContinentByIdQuery({
+    variables: { code: id },
+    skip: typeof id === "undefined",
+  });
+  const continent = data?.continent;
+
+  if (!continent || !id) return <Loader />;
+
+  const { name, countries } = continent;
+
+  console.log("continent", continent.name);
   return (
     <div>
-      <div> Country </div>
+      <div> ContinentsDetails </div>
+      {continent && (
+        <>
+          <div>{name}</div>
+          <ul>
+            {countries.map((country) => (
+              <Link to={`/country/${country.code}`}>
+                <li key={country.code} className="font-semibold">
+                  <div>{country.name}</div>
+                  <div>{country.emoji}</div>
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 };
