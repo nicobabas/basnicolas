@@ -1,17 +1,14 @@
-import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 
-//https://www.apollographql.com/docs/react/networking/authentication/#cookie
+// eslint-disable-next-line import/no-anonymous-default-export
 const client = new ApolloClient({
+  uri: "https://countries.nausicaa.wilders.dev/",
   cache: new InMemoryCache(),
   defaultOptions: {
     query: {
       fetchPolicy: "cache-first",
     },
   },
-  link: createHttpLink({
-    uri: "https://countries.nausicaa.wilders.dev/",
-    credentials: "include",
-  }),
 });
 
 export default client;
