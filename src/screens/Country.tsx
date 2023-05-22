@@ -1,38 +1,33 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import { useGetContinentByIdQuery } from "../gql/generated/schema";
+import { useGetCountryByIdQuery } from "../gql/generated/schema";
 import Loader from "../components/Loader";
 
 const Country = () => {
   const { id = "" } = useParams();
 
-  const { data } = useGetContinentByIdQuery({
+  const { data } = useGetCountryByIdQuery({
     variables: { code: id },
     skip: typeof id === "undefined",
   });
-  const continent = data?.continent;
+  const country = data?.country;
 
-  if (!continent || !id) return <Loader />;
+  if (!country || !id) return <Loader />;
 
-  const { name, countries } = continent;
+  const { name, capital, emoji } = country;
 
-  console.log("continent", continent.name);
   return (
     <div>
       <div> ContinentsDetails </div>
-      {continent && (
+      {country && (
         <>
           <div>{name}</div>
           <ul>
-            {countries.map((country) => (
-              <Link to={`/country/${country.code}`}>
-                <li key={country.code} className="font-semibold">
-                  <div>{country.name}</div>
-                  <div>{country.emoji}</div>
-                </li>
-              </Link>
-            ))}
+            <li key={country.code} className="font-semibold">
+              <div>Capital :{capital}</div>
+              <div>{emoji}</div>
+            </li>
           </ul>
         </>
       )}

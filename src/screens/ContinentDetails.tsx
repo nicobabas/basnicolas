@@ -17,7 +17,6 @@ const ContinentsDetails = () => {
 
   const { name, countries } = continent;
 
-  console.log("continent", continent.name);
   return (
     <div>
       <div> ContinentsDetails </div>
